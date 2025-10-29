@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noble Wedding Invitation</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      color: #3e1e1e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 100vh;
+      background-color: #fff6f8;
+      background-image: url('https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    /* soft overlay */
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(8px);
+      border-radius: 18px;
+      padding: 45px 30px;
+      max-width: 550px;
+      width: 90%;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+      z-index: 2;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3em;
+      color: #b03052;
+      margin: 0;
+    }
+
+    h2 {
+      font-weight: 400;
+      color: #512020;
+      font-size: 1.2em;
+      margin: 10px 0 20px 0;
+    }
+
+    #guestName {
+      font-weight: 500;
+      font-size: 1.25em;
+      margin: 20px 0;
+      color: #8b1e3f;
+    }
+
+    .details {
+      font-size: 1em;
+      line-height: 1.7;
+      color: #4a2c2a;
+    }
+
+    .rsvp-btn {
+      background-color: #b23a48;
+      color: white;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 25px;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: 1em;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .rsvp-btn:hover {
+      background-color: #932f3d;
+    }
+
+    footer {
+      margin-top: 25px;
+      font-size: 0.9em;
+      color: #6b6b6b;
+    }
+
+    /* countdown styles */
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .countdown div {
+      background: #fff0f3;
+      padding: 12px 18px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .countdown span {
+      display: block;
+      font-weight: 600;
+      font-size: 1.4em;
+      color: #b23a48;
+    }
+
+    .countdown small {
+      font-size: 0.75em;
+      color: #333;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2.4em; }
+      .overlay { padding: 30px 20px; }
+    }
+
+ .map-link, .button {
+      background-color: #b03052;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      margin: 8px;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .map-link:hover, .button:hover {
+      background-color: #8c4b25;
+      transform: scale(1.05);
+    }
+
+    footer {
+      margin-top: 25px;
+      font-size: 0.9em;
+      color: #6b6b6b;
+
+    }
+
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>Endurance ❤️ Noble</h1>
+    <h2>Joyfully Invite You To Celebrate Their Love</h2>
+
+    <div id="guestName"></div>
+
+    <div class="details">
+      <p>📅 <strong>Date:</strong> Saturday, January 17th, 2026</p>
+      <p>📍 <strong>Venue:</strong> Gadis Event Centre, Tasha - Bwari Express Rd, Abuja</p>
+      <p>🕖 <strong>Time:</strong> 11:00 AM Prompt</p>
+    </div>
+
+    <!-- Countdown Timer -->
+    <div class="countdown" id="countdown">
+      <div><span id="days">0</span><small>Days</small></div>
+      <div><span id="hours">0</span><small>Hours</small></div>
+      <div><span id="minutes">0</span><small>Minutes</small></div>
+      <div><span id="seconds">0</span><small>Seconds</small></div>
+    </div>
+
+ <a class="map-link" 
+   href="https://maps.app.goo.gl/TPh7fZ4RgGFngaUq6" 
+   target="_blank">
+  📍 Get Location
+</a>
+
+
+<div style="margin-top: 20px;">
+      <button class="button" onclick="sendRSVP('Yes')">Yes, I'll be there</button>
+      <button class="button" onclick="sendRSVP('No')">No, I won't make it</button>
+    </div>
+
+
+       <footer>We can’t wait to celebrate this special day with you 💕</footer>
+  </div>
+
+  <script>
+    // Get guest name from URL
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('name') ? decodeURIComponent(params.get('name')) : 'Dear Guest';
+    document.getElementById('guestName').innerHTML = `Welcome, <strong>${name}</strong>!`;
+
+    // Countdown Timer
+    const countdown = document.getElementById("countdown");
+    const targetDate = new Date("January 17, 2026 11:00:00").getTime();
+
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
+    }
+
+    setInterval(updateCountdown, 1000);
+// Send RSVP Response
+    async function sendRSVP(response) {
+  const scriptURL = "https://script.google.com/macros/s/AKfycby85b5sxO_7tKKvL4twOm9x8yPHFG2r4kVdHnswrZDNwVdHs8IR6smVQ4utNcYPkZus/exec";
+
+  try {
+    await fetch(scriptURL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name, response: response }) // ✅ use 'name', not 'guestName'
+    });
+
+    document.body.innerHTML = `
+      <div style="background:url('https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=1400&q=80') no-repeat center center/cover;
+      height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+      text-align:center;color:white;font-family:Poppins,sans-serif;">
+        <div style="background:rgba(0,0,0,0.6);padding:40px;border-radius:15px;">
+          <h1>🎉 Thank You, ${name}!</h1> <!-- ✅ use 'name' here too -->
+          <p>Your response has been recorded as: <b>${response}</b></p>
+          <p>We can’t wait to celebrate this special day with you!</p>
+        </div>
+      </div>
+    `;
+  } catch (err) {
+    alert("There was an error submitting your response. Please try again later.");
+    console.error(err);
+  }
+}
+
+
+
+  </script>
+</body>
+</html>
