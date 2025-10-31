@@ -283,8 +283,10 @@
 
     // Title
     const heading = document.createElement('h1');
-    heading.textContent = `Thank You, ${name}!`;
-    card.appendChild(heading);
+heading.textContent = `🎉 Thank You, ${name}!`;
+heading.style.fontSize = "1.8em";   // ✅ smaller font size
+card.appendChild(heading);
+
 
     // Response message
     const respPara = document.createElement('p');
@@ -367,4 +369,5 @@
 
 </body>
 </html>
+
 
