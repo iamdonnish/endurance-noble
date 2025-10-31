@@ -328,11 +328,12 @@ card.appendChild(heading);
 ];
 
 
-    items.forEach(t => {
-      const li = document.createElement('li');
-      li.textContent = t;
-      ul.appendChild(li);
-    });
+   items.forEach(t => {
+  const li = document.createElement('li');
+  li.innerHTML = t;     // ✅ allows bold HTML to render
+  ul.appendChild(li);
+});
+
 
     box.appendChild(ul);
     card.appendChild(box);
@@ -373,5 +374,6 @@ card.appendChild(heading);
 
 </body>
 </html>
+
 
 
